@@ -163,7 +163,11 @@
       <a href="#about" class="button">
         اكتشف المزيد
       </a>
-    </div>
+<button class="button" id="helloBtn">
+    اضغط هنا
+</button>
+
+<p id="message"></p>    </div>
 
     <section class="container" id="about">
       <h2>من أنا؟</h2>
@@ -213,5 +217,12 @@
     جميع الحقوق محفوظة © 2026
   </footer>
 
-</body>
+<script>
+  const button = document.getElementById("helloBtn");
+
+  button.addEventListener("click", function() {
+    document.getElementById("message").textContent =
+      "مرحبا بك في موقعي! سعيد بزيارتك ❤️";
+  });
+</script></body>
 </html>
