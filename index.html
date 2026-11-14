@@ -1,45 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مساحتي الرقمية الشخصية">
+  <meta name="theme-color" content="#fafafa">
   <title>مساحتي الرقمية</title>
-
-.theme-toggle {
-    margin-top: 15px;
-    padding: 10px 18px;
-    background: white;
-    color: #315a85;
-    border: 1px solid #315a85;
-    border-radius: 7px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-body.dark-mode {
-    background: #171717;
-    color: white;
-}
-
-body.dark-mode header,
-body.dark-mode .card {
-    background: #242424;
-    border-color: #444;
-}
-
-body.dark-mode nav a,
-body.dark-mode .hero p,
-body.dark-mode .description,
-body.dark-mode footer {
-    color: #ccc;
-}
-
-body.dark-mode .theme-toggle {
-    background: #242424;
-    color: white;
-    border-color: #888;
-}
 
   <style>
     * {
@@ -53,6 +19,7 @@ body.dark-mode .theme-toggle {
       background: #fafafa;
       color: #20242c;
       line-height: 1.9;
+      transition: background 0.25s ease, color 0.25s ease;
     }
 
     .container {
@@ -63,6 +30,7 @@ body.dark-mode .theme-toggle {
     header {
       padding: 25px 0;
       border-bottom: 1px solid #e8e8e8;
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     nav {
@@ -70,6 +38,7 @@ body.dark-mode .theme-toggle {
       justify-content: space-between;
       align-items: center;
       gap: 20px;
+      flex-wrap: wrap;
     }
 
     .logo {
@@ -107,12 +76,28 @@ body.dark-mode .theme-toggle {
 
     .button {
       display: inline-block;
-      margin-top: 25px;
+      margin: 25px 5px 0;
       padding: 10px 25px;
       background: #315a85;
       color: white;
+      border: 1px solid #315a85;
       border-radius: 7px;
       text-decoration: none;
+      cursor: pointer;
+      font-size: 15px;
+      font-family: inherit;
+    }
+
+    .theme-toggle {
+      margin: 0;
+      padding: 8px 14px;
+      background: transparent;
+      color: #315a85;
+      border: 1px solid #315a85;
+      border-radius: 7px;
+      cursor: pointer;
+      font-size: 14px;
+      font-family: inherit;
     }
 
     section {
@@ -139,11 +124,18 @@ body.dark-mode .theme-toggle {
       padding: 25px;
       border: 1px solid #eee;
       border-radius: 12px;
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     .card h3 {
       color: #315a85;
       margin-bottom: 10px;
+    }
+
+    #message {
+      margin-top: 12px;
+      color: #315a85;
+      font-weight: bold;
     }
 
     footer {
@@ -152,11 +144,51 @@ body.dark-mode .theme-toggle {
       text-align: center;
       color: #888;
       margin-top: 50px;
+      transition: border-color 0.25s ease;
+    }
+
+    /* ألوان الوضع الليلي */
+    body.dark-mode {
+      background: #171717;
+      color: #f5f5f5;
+    }
+
+    body.dark-mode header,
+    body.dark-mode .card {
+      background: #242424;
+      border-color: #444;
+    }
+
+    body.dark-mode nav a,
+    body.dark-mode .hero p,
+    body.dark-mode .description,
+    body.dark-mode footer {
+      color: #ccc;
+    }
+
+    body.dark-mode .logo,
+    body.dark-mode .card h3,
+    body.dark-mode #message {
+      color: #8bbcff;
+    }
+
+    body.dark-mode .theme-toggle {
+      background: #242424;
+      color: #8bbcff;
+      border-color: #8bbcff;
+    }
+
+    body.dark-mode footer {
+      border-color: #444;
     }
 
     @media (max-width: 650px) {
       nav {
         flex-direction: column;
+      }
+
+      nav a {
+        margin: 0 7px;
       }
 
       .skills {
@@ -171,7 +203,6 @@ body.dark-mode .theme-toggle {
 </head>
 
 <body>
-
   <header>
     <nav class="container">
       <div class="logo">مساحتي الرقمية.</div>
@@ -180,9 +211,11 @@ body.dark-mode .theme-toggle {
         <a href="#about">من أنا</a>
         <a href="#skills">مهاراتي</a>
         <a href="#contact">تواصل</a>
-<button class="theme-toggle" id="themeBtn">
-    🌙 الوضع الليلي
-</button>      </div>
+      </div>
+
+      <button class="theme-toggle" id="themeBtn" type="button" aria-pressed="false">
+        🌙 الوضع الليلي
+      </button>
     </nav>
   </header>
 
@@ -197,18 +230,17 @@ body.dark-mode .theme-toggle {
         وتطوير المواقع والبرمجة.
       </p>
 
-      <a href="#about" class="button">
-        اكتشف المزيد
-      </a>
-<button class="button" id="helloBtn">
-    اضغط هنا
-</button>
+      <a href="#about" class="button">اكتشف المزيد</a>
 
-<p id="message"></p>    </div>
+      <button class="button" id="helloBtn" type="button">
+        اضغط هنا
+      </button>
+
+      <p id="message" aria-live="polite"></p>
+    </div>
 
     <section class="container" id="about">
       <h2>من أنا؟</h2>
-
       <p class="description">
         أنا شخص مهتم بالتكنولوجيا وتطوير الويب.
         أتعلم من الصفر وأطور مهاراتي من خلال التطبيق.
@@ -217,13 +249,9 @@ body.dark-mode .theme-toggle {
 
     <section class="container" id="skills">
       <h2>مهاراتي</h2>
-
-      <p class="description">
-        التقنيات التي أتعلمها حالياً.
-      </p>
+      <p class="description">التقنيات التي أتعلمها حالياً.</p>
 
       <div class="skills">
-
         <div class="card">
           <h3>HTML</h3>
           <p>بناء صفحات ومحتوى المواقع.</p>
@@ -238,40 +266,40 @@ body.dark-mode .theme-toggle {
           <h3>JavaScript</h3>
           <p>إضافة التفاعل للمواقع.</p>
         </div>
-
       </div>
     </section>
 
     <section class="container" id="contact">
       <h2>تواصل معي</h2>
-      <p class="description">
-        سيتم إضافة وسائل التواصل لاحقاً.
-      </p>
+      <p class="description">سيتم إضافة وسائل التواصل لاحقاً.</p>
     </section>
   </main>
 
   <footer>
     جميع الحقوق محفوظة © 2026
   </footer>
-const themeBtn = document.getElementById("themeBtn");
 
-themeBtn.addEventListener("click", function() {
+  <script>
+    // زر رسالة الترحيب
+    const helloBtn = document.getElementById("helloBtn");
+    const message = document.getElementById("message");
 
-    document.body.classList.toggle("dark-mode");
+    helloBtn.addEventListener("click", function () {
+      message.textContent = "مرحبا بك في موقعي! سعيد بزيارتك ❤️";
+    });
 
-    if (document.body.classList.contains("dark-mode")) {
-        themeBtn.textContent = "☀️ الوضع النهاري";
-    } else {
-        themeBtn.textContent = "🌙 الوضع الليلي";
-    }
+    // زر تغيير الوضع بين النهاري والليلي
+    const themeBtn = document.getElementById("themeBtn");
 
-});
-<script>
-  const button = document.getElementById("helloBtn");
+    themeBtn.addEventListener("click", function () {
+      const isDark = document.body.classList.toggle("dark-mode");
 
-  button.addEventListener("click", function() {
-    document.getElementById("message").textContent =
-      "مرحبا بك في موقعي! سعيد بزيارتك ❤️";
-  });
-</script></body>
+      themeBtn.textContent = isDark
+        ? "☀️ الوضع النهاري"
+        : "🌙 الوضع الليلي";
+
+      themeBtn.setAttribute("aria-pressed", String(isDark));
+    });
+  </script>
+</body>
 </html>
