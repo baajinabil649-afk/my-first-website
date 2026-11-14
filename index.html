@@ -6,6 +6,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>مساحتي الرقمية</title>
 
+.theme-toggle {
+    margin-top: 15px;
+    padding: 10px 18px;
+    background: white;
+    color: #315a85;
+    border: 1px solid #315a85;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+body.dark-mode {
+    background: #171717;
+    color: white;
+}
+
+body.dark-mode header,
+body.dark-mode .card {
+    background: #242424;
+    border-color: #444;
+}
+
+body.dark-mode nav a,
+body.dark-mode .hero p,
+body.dark-mode .description,
+body.dark-mode footer {
+    color: #ccc;
+}
+
+body.dark-mode .theme-toggle {
+    background: #242424;
+    color: white;
+    border-color: #888;
+}
+
   <style>
     * {
       box-sizing: border-box;
@@ -145,7 +180,9 @@
         <a href="#about">من أنا</a>
         <a href="#skills">مهاراتي</a>
         <a href="#contact">تواصل</a>
-      </div>
+<button class="theme-toggle" id="themeBtn">
+    🌙 الوضع الليلي
+</button>      </div>
     </nav>
   </header>
 
@@ -216,7 +253,19 @@
   <footer>
     جميع الحقوق محفوظة © 2026
   </footer>
+const themeBtn = document.getElementById("themeBtn");
 
+themeBtn.addEventListener("click", function() {
+
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+        themeBtn.textContent = "☀️ الوضع النهاري";
+    } else {
+        themeBtn.textContent = "🌙 الوضع الليلي";
+    }
+
+});
 <script>
   const button = document.getElementById("helloBtn");
 
