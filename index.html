@@ -14,6 +14,10 @@
       padding: 0;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: Arial, sans-serif;
       background: #fafafa;
@@ -24,11 +28,11 @@
 
     .container {
       width: min(90%, 1000px);
-      margin: auto;
+      margin-inline: auto;
     }
 
     header {
-      padding: 25px 0;
+      padding: 22px 0;
       border-bottom: 1px solid #e8e8e8;
       transition: background 0.25s ease, border-color 0.25s ease;
     }
@@ -45,16 +49,28 @@
       font-weight: bold;
       color: #315a85;
       font-size: 20px;
+      white-space: nowrap;
     }
 
-    nav a {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
       text-decoration: none;
       color: #555;
-      margin-right: 18px;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: #315a85;
     }
 
     .hero {
-      padding: 110px 0;
+      padding: 105px 0;
       text-align: center;
     }
 
@@ -65,6 +81,7 @@
 
     h1 {
       font-size: clamp(35px, 6vw, 55px);
+      line-height: 1.3;
       margin: 15px 0;
     }
 
@@ -86,6 +103,12 @@
       cursor: pointer;
       font-size: 15px;
       font-family: inherit;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .button:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
     }
 
     .theme-toggle {
@@ -102,6 +125,7 @@
 
     section {
       padding: 55px 0;
+      scroll-margin-top: 20px;
     }
 
     h2 {
@@ -112,9 +136,10 @@
       color: #777;
     }
 
-    .skills {
+    .skills,
+    .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 20px;
       margin-top: 25px;
     }
@@ -130,6 +155,18 @@
     .card h3 {
       color: #315a85;
       margin-bottom: 10px;
+    }
+
+    .card a {
+      display: inline-block;
+      margin-top: 16px;
+      color: #315a85;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .card a:hover {
+      text-decoration: underline;
     }
 
     #message {
@@ -159,7 +196,7 @@
       border-color: #444;
     }
 
-    body.dark-mode nav a,
+    body.dark-mode .nav-links a,
     body.dark-mode .hero p,
     body.dark-mode .description,
     body.dark-mode footer {
@@ -168,6 +205,7 @@
 
     body.dark-mode .logo,
     body.dark-mode .card h3,
+    body.dark-mode .card a,
     body.dark-mode #message {
       color: #8bbcff;
     }
@@ -182,16 +220,17 @@
       border-color: #444;
     }
 
-    @media (max-width: 650px) {
+    @media (max-width: 700px) {
       nav {
         flex-direction: column;
       }
 
-      nav a {
-        margin: 0 7px;
+      .nav-links {
+        justify-content: center;
       }
 
-      .skills {
+      .skills,
+      .projects-grid {
         grid-template-columns: 1fr;
       }
 
@@ -199,17 +238,30 @@
         padding: 75px 0;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
   </style>
 </head>
 
 <body>
   <header>
-    <nav class="container">
+    <nav class="container" aria-label="القائمة الرئيسية">
       <div class="logo">مساحتي الرقمية.</div>
 
-      <a href="#projects">مشاريعي</a><div>
+      <div class="nav-links">
         <a href="#about">من أنا</a>
         <a href="#skills">مهاراتي</a>
+        <a href="#projects">مشاريعي</a>
         <a href="#contact">تواصل</a>
       </div>
 
@@ -222,20 +274,14 @@
   <main>
     <div class="container hero">
       <small>مرحباً بك في موقعي</small>
-
       <h1>أتعلم وأبني<br>أفكاراً جديدة.</h1>
-
       <p>
         أشارك هنا رحلتي في عالم التكنولوجيا
         وتطوير المواقع والبرمجة.
       </p>
 
       <a href="#about" class="button">اكتشف المزيد</a>
-
-      <button class="button" id="helloBtn" type="button">
-        اضغط هنا
-      </button>
-
+      <button class="button" id="helloBtn" type="button">اضغط هنا</button>
       <p id="message" aria-live="polite"></p>
     </div>
 
@@ -269,33 +315,26 @@
       </div>
     </section>
 
+    <section class="container" id="projects">
+      <h2>مشاريعي</h2>
+      <p class="description">هنا غادي نشارك الأعمال ديالي.</p>
+
+      <div class="projects-grid">
+        <article class="card">
+          <h3>موقعي الشخصي</h3>
+          <p>
+            أول مشروع ديالي في تطوير المواقع.
+            بنيتو باستعمال HTML وCSS وJavaScript.
+          </p>
+          <a href="https://github.com/baajinabil649-afk/my-first-website" target="_blank" rel="noopener noreferrer">
+            مشاهدة المشروع على GitHub
+          </a>
+        </article>
+      </div>
+    </section>
+
     <section class="container" id="contact">
-<section class="container" id="projects">
-
-    <h2>مشاريعي</h2>
-
-    <p class="description">
-        هنا غادي نشارك الأعمال ديالي.
-    </p>
-
-    <div class="skills">
-
-        <div class="card">
-            <h3>موقعي الشخصي</h3>
-
-            <p>
-                أول مشروع ديالي في تطوير المواقع.
-                بنيتو باستعمال HTML وCSS وJavaScript.
-            </p>
-
-            <a href="https://github.com/baajinabil649-afk/my-first-website">
-                مشاهدة المشروع
-            </a>
-        </div>
-
-    </div>
-
-</section>      <h2>تواصل معي</h2>
+      <h2>تواصل معي</h2>
       <p class="description">سيتم إضافة وسائل التواصل لاحقاً.</p>
     </section>
   </main>
